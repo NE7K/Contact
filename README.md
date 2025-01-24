@@ -1,16 +1,57 @@
-# contact
+# 연락처
 
-contact file
+list view 공부용
 
-## Getting Started
+## 메모
 
-This project is a starting point for a Flutter application.
+``` dart
 
-A few resources to get you started if this is your first Flutter project:
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          title: Text('연락처')
+        ),
+        body: ListView(
+         children: [
+           Row(
+             children: [
+               Icon(Icons.account_circle),
+               Text('홍길동'),
+             ],
+           ),
+           Row(
+             children: [
+               Icon(Icons.account_circle),
+               Text('홍길동'),
+             ],
+           ),
+           Row(
+             children: [
+               Icon(Icons.account_circle),
+               Text('홍길동'),
+             ],
+           )
+         ],
+        ),
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+        bottomNavigationBar: bottomIcon()
+
+      ),
+    );
+  }
+}
+
+
+```
+
+> list view는 이런 방식으로 작성 가능하고 listtile 사용가능
+>>>ListTile(
+leading: Icon(Icons.account_circle),
+title: Text('홍길동')
+)

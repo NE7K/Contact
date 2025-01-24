@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var a = 1;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        floatingActionButton: FloatingActionButton(
+            child: Text(a.toString()),
+            onPressed: () {
+              setState(() {
+                a++;
+              });
+            }
+        ),
         appBar: AppBar(
           backgroundColor: Colors.blue,
           title: Text('연락처')
         ),
-        body: ListView(
-         children: [
-           Row(
-             children: [
-               Icon(Icons.account_circle),
-               Text('홍길동'),
-             ],
-           ),
-           Row(
-             children: [
-               Icon(Icons.account_circle),
-               Text('홍길동'),
-             ],
-           ),
-           Row(
-             children: [
-               Icon(Icons.account_circle),
-               Text('홍길동'),
-             ],
-           )
-         ],
+        body: ListView.builder(
+          itemCount: 300,
+          itemBuilder: (context, i) {
+            return ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('홍길동'),
+              trailing: TextButton(onPressed: () {}, child: Text('dfjkld')),
+            );
+          },
         ),
 
         bottomNavigationBar: bottomIcon()

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+// run - MateialApp content
 void main() {
   runApp( MaterialApp (
       home: MyApp()
   ));
 }
 
+// state
 class MyApp extends StatefulWidget {
   MyApp({super.key});
 
@@ -25,26 +27,7 @@ class _MyAppState extends State<MyApp> {
             child: Text(a.toString()),
             onPressed: () {
               showDialog(context: context, builder: (context) {
-                return Dialog(
-                    child: Container(
-                      width: 300,
-                      height: 500,
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          Text('Contact'),
-                          TextField(),
-                          Row(
-                            children: [
-                              ElevatedButton(onPressed: () {}, child: Text('cancel')),
-                              ElevatedButton(onPressed: () {}, child: Text('ok'))
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                );
+                return DialogUi(people: a);
               });
             }
         ),
@@ -73,6 +56,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+// 하단 navigator appbar
 class bottomIcon extends StatelessWidget {
   const bottomIcon({super.key});
 
@@ -88,6 +72,40 @@ class bottomIcon extends StatelessWidget {
             ]
         )
 
+    );
+  }
+}
+
+// floating action button event
+class DialogUi extends StatelessWidget {
+  DialogUi({super.key, this.people });
+
+  var people;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        child: Container(
+          width: 300,
+          height: 200,
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Contact'),
+              Text(people.toString()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(onPressed: () {
+                    Navigator.pop(context);
+                  }, child: Text('cancel'))
+                ],
+              )
+            ],
+          ),
+        )
     );
   }
 }

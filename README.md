@@ -1,6 +1,5 @@
-# 연락처
+# Contact Application
 
-> Contact Application
 
 # Study Recode
 
@@ -11,7 +10,7 @@
 
 - context에 대해서 알아야 하는 이유는 ShowDialog와 같은 기능에서 필수적으로 사용되는 때문이다.
 
-```dart
+```
   print(context.findAncestorWidgetOfExactType<MaterialApp>());
 ```
 아래는 Contact Application 기본적인 레이아웃 틀이다.
@@ -74,6 +73,14 @@ title: Text('홍길동')
 
 ### State
 
-setState은 rendering을 다시 진행시키는 기능으로 사용된다.
+setState은 rendering을 다시 진행시키는 기능을 가지고 있다.
 
-앞으로도 가장 많이 사용될 기능이다.
+만약에, 부모가 가진 변수를 자식이 똑같은 변수를 사용하고 싶은 경우에는?
+
+```
+return DialogUi(people : a);
+DialogUi({super.key, this.people });
+var people;
+``` 
+
+위 처럼 사용하면 자식도 부모가 가진 함수를 이용할 수 있다. (전송, 등록, 사용)

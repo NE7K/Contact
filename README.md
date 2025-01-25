@@ -1,8 +1,23 @@
 # 연락처
 
-list view 공부용
+> Contact Application
 
-## 메모
+# Study Recode
+
+### context
+아래 코드는 context 상위에 어떤 레이아웃이 존재하는지 체크할 수 있다.
+
+예를 들어서, Material > Scaffold (context)인 상황에서는 출력되는 문구는 Material이다.
+
+- context에 대해서 알아야 하는 이유는 ShowDialog와 같은 기능에서 필수적으로 사용되는 때문이다.
+
+```dart
+  print(context.findAncestorWidgetOfExactType<MaterialApp>());
+```
+아래는 Contact Application 기본적인 레이아웃 틀이다.
+
+### ListView, ListTile
+가장 기본이되는 ListView를 아래와 같이 사용할 수 있다.
 
 ``` dart
 
@@ -50,8 +65,15 @@ class MyApp extends StatelessWidget {
 
 ```
 
-> list view는 이런 방식으로 작성 가능하고 listtile 사용가능
->>>ListTile(
+하지만, 아래와 같이 ListTile을 사용해서 간단하게 표현할 수 있다.
+
+> ListTile(
 leading: Icon(Icons.account_circle),
 title: Text('홍길동')
 )
+
+### State
+
+setState은 rendering을 다시 진행시키는 기능으로 사용된다.
+
+앞으로도 가장 많이 사용될 기능이다.

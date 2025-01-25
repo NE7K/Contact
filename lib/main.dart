@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp( MaterialApp (
+      home: MyApp()
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -13,16 +15,36 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var a = 1;
+  var name = ['김영숙', '홍길동', '나구글'];
+  var like = [0, 0, 0];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         floatingActionButton: FloatingActionButton(
             child: Text(a.toString()),
             onPressed: () {
-              setState(() {
-                a++;
+              showDialog(context: context, builder: (context) {
+                return Dialog(
+                    child: Container(
+                      width: 300,
+                      height: 500,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Text('Contact'),
+                          TextField(),
+                          Row(
+                            children: [
+                              ElevatedButton(onPressed: () {}, child: Text('cancel')),
+                              ElevatedButton(onPressed: () {}, child: Text('ok'))
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                );
               });
             }
         ),
@@ -31,20 +53,23 @@ class _MyAppState extends State<MyApp> {
           title: Text('연락처')
         ),
         body: ListView.builder(
-          itemCount: 300,
+          itemCount: 3,
           itemBuilder: (context, i) {
             return ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('홍길동'),
-              trailing: TextButton(onPressed: () {}, child: Text('dfjkld')),
+              leading: Text(like[i].toString()),
+              title: Text(name[i]),
+              trailing: ElevatedButton(onPressed: () {
+                setState(() {
+                  like[i]++;
+                });
+              }, child: Text('좋아요'))
             );
           },
         ),
 
         bottomNavigationBar: bottomIcon()
 
-      ),
-    );
+      );
   }
 }
 

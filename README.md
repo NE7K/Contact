@@ -1,5 +1,8 @@
 # Contact Application
 
+Dart 언어로 작성된 연락처 애플리케이션입니다.
+
+<br>
 
 # Study Recode
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 
 // run - MateialApp content
 void main() {
@@ -18,8 +19,32 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
+  getPermission() async {
+    var status = await Permission.contacts.status;
+    if (status.isGranted) {
+      print('허락됨');
+      List<Contact> contacts = await FlutterContacts.getContacts();
+
+      setState(() {
+        name = contacts;
+      });
+
+    } else if (status.isDenied) {
+      print('거절됨');
+      Permission.contacts.request();
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPermission();
+    // openAppSettings(); 앱 설정 띄우기
+  }
+
   var total = 3; // 사람 총 인원
-  var name = ['김영숙', '홍길동', '나구글']; // 사람 이름 저장
+  var name = []; // 사람 이름 저장
 
   addPerson(a) { // 사람 추가 함수, 매개변수 a
     setState(() {
@@ -41,14 +66,15 @@ class _MyAppState extends State<MyApp> {
         ),
         appBar: AppBar(
           backgroundColor: Colors.blue,
-          title: Text('Contact Appliaction')
+          title: Text('Contact Appliaction'),
+          actions: [ IconButton(onPressed: () { getPermission(); }, icon: Icon(Icons.add))],
         ),
         body: ListView.builder(
           itemCount: name.length, //
           itemBuilder: (context, i) {
             return ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text(name[i])
+              title: Text(name[i].displayName)
             );
           },
         ),

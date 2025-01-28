@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
     // openAppSettings(); < 앱 설정 띄우기
   }
 
-  var name = []; // 사람 이름 저장
+  List<Contact> name = []; // 사람 이름 저장
   // List<contacts>를 Dynamic으로 변경해서 타입 오류 방지 but, dynamic = 부하 증가
 
   addPerson(contact) { // 사람 추가 함수, 매개변수 a
@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
           itemBuilder: (context, i) {
             return ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text(name[i].displayName) // 연락처의 displayname 부분만 카피
+              title: Text(name[i].displayName ?? '이름이 없는 사람') // 연락처의 displayname 부분만 카피
             );
           },
         ),
@@ -106,7 +106,7 @@ class DialogUi extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text('이름을 입력해주세요'),
-              TextField( controller: inputData ),
+              TextField( decoration: InputDecoration( hintText: '연락처 이름을 입력해주세요.' ), controller: inputData ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -114,7 +114,6 @@ class DialogUi extends StatelessWidget {
 
                     // Insert new contact
                     final newContact = Contact();
-                    newContact.name.first = inputData.text;
                     newContact.displayName = inputData.text;
                     newContact.insert();
                     addPerson(newContact);
